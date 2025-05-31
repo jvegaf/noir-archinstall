@@ -23,7 +23,6 @@ packages_common_utils=(
   "cpio"
   "uv"
   "go"
-  "rustup"
   "luarocks"
   "nodejs"
   "npm"
@@ -366,6 +365,11 @@ zram-size = min(ram, 8192)" >/etc/systemd/zram-generator.conf
 echo "→ Enabling colours and parallel downloads for pacman..."
 sudo sed -Ei 's/^#(Color)$/\1/;s/^#(ParallelDownloads).*/\1 = 10/' /etc/pacman.conf
 
+# Setup rust
+echo "→ Installing Rust..."
+sudo pacman -S --needed --noconfirm rustup
+rustup default stable
+
 # Install paru AUR Helper
 echo "→ Installing paru..."
 sudo pacman -S --needed --noconfirm base-devel
@@ -398,9 +402,6 @@ install_packages "${packages_firmware[@]}"
 echo "→ Switching user and root shell to Zsh..."
 sudo chsh -s /usr/bin/zsh $USER
 sudo chsh -s /usr/bin/zsh root
-
-# Setup rust
-rustup default stable
 
 # Install miscellaneous packages
 install_misc
