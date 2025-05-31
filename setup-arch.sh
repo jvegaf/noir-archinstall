@@ -242,6 +242,17 @@ install_misc() {
   curl -fsSL https://ollama.com/install.sh | sh
 }
 
+install_nvidia_drivers() {
+  read -p "Would you like to install Nvidia drivers? (y/n): " answer
+  case "$answer" in
+  [Yy] | [Yy][Ee][Ss])
+    echo "→ Installing Nvidia drivers..."
+    install_packages "${packages_nvidia[@]}"
+    ;;
+  *) echo "→ Skipping installation of Nvidia drivers..." ;;
+  esac
+}
+
 install_gaming_tools() {
   read -p "Would you like to install gaming tools? (y/n): " answer
   case "$answer" in
@@ -390,7 +401,7 @@ install_packages "${packages_common_wayland[@]}"
 # Install window managers
 select_window_managers
 
-# Install fonts and apps
+# Install fonts, apps, and missing firmware
 echo "→ Installing fonts..."
 install_packages "${packages_fonts[@]}"
 echo "→ Installing applications..."
@@ -407,8 +418,7 @@ sudo chsh -s /usr/bin/zsh root
 install_misc
 
 # Setup Nvidia drivers
-echo "→ Installing Nvidia drivers..."
-install_packages "${packages_nvidia[@]}"
+install_nvidia_drivers
 
 # Install gaming tools
 install_gaming_tools
