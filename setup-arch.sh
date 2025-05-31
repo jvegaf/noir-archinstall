@@ -103,10 +103,8 @@ packages_common_x11=(
 )
 
 packages_common_wayland=(
-  "qt5"
-  "qt6"
-  "qt5-qtwayland"
-  "qt6-qtwayland"
+  "qt5-wayland"
+  "qt6-wayland"
   "egl-wayland"
   "wlr-randr"
   "wlogout"
@@ -234,7 +232,7 @@ select_window_managers() {
   done
 }
 
-install_misc () {
+install_misc() {
   # RMPC Music player
   cargo install --git https://github.com/mierak/rmpc --locked
 
@@ -256,7 +254,7 @@ install_gaming_tools() {
   esac
 }
 
-setup_mpd () {
+setup_mpd() {
   mkdir ~/.local/share/mpd
   touch ~/.local/share/mpd/database
   mkdir ~/.local/share/mpd/playlists
@@ -314,7 +312,6 @@ install_dotfiles() {
   esac
 }
 
-
 clear
 
 cat <<"EOF"
@@ -363,7 +360,7 @@ EOF
 # ZRAM configuration
 echo "→ Configuring ZRAM..."
 sudo echo "[zram0]
-zram-size = min(ram, 8192)" > /etc/systemd/zram-generator.conf
+zram-size = min(ram, 8192)" >/etc/systemd/zram-generator.conf
 
 # Pacman eye-candy features
 echo "→ Enabling colours and parallel downloads for pacman..."
