@@ -1,0 +1,4 @@
+hyprland
+niri
+awesome
+i3

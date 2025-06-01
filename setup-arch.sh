@@ -2,9 +2,10 @@
 
 # Install required packages
 install_packages() {
-  for pkg; do
-    paru -S --needed --noconfirm "${pkg}" &>/dev/null
-  done
+  paru -S --needed --noconfirm "$@"
+  # for pkg; do
+  #   paru -S --needed --noconfirm "${pkg}"
+  # done
 }
 
 packages_common_utils=(
@@ -217,16 +218,24 @@ packages_nvidia=(
   "nvidia-settings"
 )
 
-select_window_managers() {
-  IFS=', '
-  read -p "→ Choose window managers to install (hyprland, niri, awesome, i3): " -a array
-  for choice in "${array[@]}"; do
+set_variables() {
+  sudo pacman -S --needed --noconfirm gum
+
+  choice_wm=$(cat window_managers.txt | gum choose --no-limit --header "Choose window managers you would like to install.")
+  choice_nvidia=$(gum choose "Yes" "No" --header "Would you like to install Nvidia drivers?")
+  choice_gaming_tools=$(gum choose "Yes" "No" --header "Would you like to install gaming tools?")
+  choice_dotfiles=$(gum choose "Yes" "No" --header "Would you like to install Noir Dotfiles?")
+  choice_wallpapers=$(gum choose "Yes" "No" --header "Would you like to install Noir Wallpapers?")
+}
+
+install_window_managers() {
+  IFS = ', '
+  for choice in "${choice_wm[@]}"; do
     case "$choice" in
     hyprland*) install_packages "${packages_hyprland[@]}" ;;
     niri*) install_packages "${packages_niri[@]}" ;;
     awesome*) install_packages "${packages_awesome[@]}" ;;
     i3*) install_packages "${packages_i3[@]}" ;;
-    *) echo "→ Invalid window manager: $choice" ;;
     esac
   done
 }
@@ -243,24 +252,22 @@ install_misc() {
 }
 
 install_nvidia_drivers() {
-  read -p "Would you like to install Nvidia drivers? (y/n): " answer
-  case "$answer" in
-  [Yy] | [Yy][Ee][Ss])
+  case "$choice_nvidia" in
+  Yes)
     echo "→ Installing Nvidia drivers..."
     install_packages "${packages_nvidia[@]}"
     ;;
-  *) echo "→ Skipping installation of Nvidia drivers..." ;;
+  No) echo "→ Skipping installation of Nvidia drivers..." ;;
   esac
 }
 
 install_gaming_tools() {
-  read -p "Would you like to install gaming tools? (y/n): " answer
-  case "$answer" in
-  [Yy] | [Yy][Ee][Ss])
+  case "$choice_gaming_tools" in
+  Yes)
     echo "→ Installing gaming tools..."
     install_packages "${packages_gaming[@]}"
     ;;
-  *) echo "→ Skipping installation of gaming tools..." ;;
+  No) echo "→ Skipping installation of gaming tools..." ;;
   esac
 }
 
@@ -288,18 +295,16 @@ install_ags() {
 }
 
 install_dotfiles() {
-  read -p "Would you like to install Noir Dotfiles? (y/n): " answer_dotfiles
-  case "$answer_dotfiles" in
-  [Yy] | [Yy][Ee][Ss])
+  case "$choice_dotfiles" in
+  Yes)
     echo "→ Installing Noir Dotfiles..."
-    read -p "Would you like to install Noir Wallpapers? (y/n): " answer_wallpapers
 
     cd ~ || exit
-    case "$answer_wallpapers" in
-    [Yy] | [Yy][Ee][Ss])
+    case "$choice_wallpapers" in
+    Yes)
       git clone --depth 1 --recurse-submodules https://github.com/somanoir/.noir-dotfiles.git
       ;;
-    [Nn] | [Nn][Oo])
+    No)
       git clone --depth 1 https://github.com/somanoir/.noir-dotfiles.git
       ;;
     esac
@@ -311,13 +316,9 @@ install_dotfiles() {
 
     return 0
     ;;
-  [Nn] | [Nn][Oo])
+  No)
     echo "→ Skipping installation of Noir Dotfiles..."
-
     return 0
-    ;;
-  *)
-    return 1
     ;;
   esac
 }
@@ -335,9 +336,25 @@ cat <<"EOF"
                                                  |_|
 EOF
 
+while true; do
+  read -rp "Would you like to proceed with setup? (y/n): " answer
+  case "$answer" in
+  [Yy]*) break ;; # Proceed with the script
+  *)
+    echo "Exiting."
+    exit 1
+    ;; # Exit the script
+  esac
+done
+
 # Create user folders
 mkdir /home/$USER/{Code,Games,Media,Misc,Mounts,My}
 mkdir -p /home/$USER/.local/{bin,share/backgrounds,share/icons}
+sudo mkdir /opt/$USER
+sudo chown -R $USER:$USER /opt/$USER
+
+# Set global variables
+set_variables
 
 # Boot backup hook
 echo "→ Configuring /boot backup when pacman transactions are made..."
@@ -386,7 +403,7 @@ echo "→ Installing paru..."
 sudo pacman -S --needed --noconfirm base-devel
 git clone https://aur.archlinux.org/paru.git /tmp/paru
 cd /tmp/paru
-makepkg -si
+makepkg -si --needed --noconfirm
 
 # Do an initial update
 echo "→ Updating the system..."
@@ -399,7 +416,7 @@ install_packages "${packages_common_x11[@]}"
 install_packages "${packages_common_wayland[@]}"
 
 # Install window managers
-select_window_managers
+install_window_managers
 
 # Install fonts, apps, and missing firmware
 echo "→ Installing fonts..."
