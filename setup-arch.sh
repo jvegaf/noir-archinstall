@@ -149,6 +149,7 @@ packages_i3=(
 packages_apps=(
   "ghostty"
   "firefox"
+  "librewolf-bin"
   "neovim"
   "vim"
   "nano"
@@ -285,7 +286,6 @@ setup_mpd() {
 install_flatpaks() {
   flatpak install flathub com.github.tchx84.Flatseal --assumeyes
   flatpak install flathub de.haeckerfelix.Shortwave --assumeyes
-  flatpak install flathub io.gitlab.librewolf-community --assumeyes
   flatpak install flathub md.obsidian.Obsidian --assumeyes
   flatpak install flathub com.github.vikdevelop.photopea_app --assumeyes
 }
