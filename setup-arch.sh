@@ -84,6 +84,7 @@ packages_common_utils=(
   "gvfs-smb"
   "ncdu"
   "dkms"
+  "archlinux-xdg-menu"
 )
 
 packages_common_x11=(
