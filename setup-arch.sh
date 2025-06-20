@@ -223,11 +223,37 @@ packages_nvidia=(
 set_variables() {
   sudo pacman -S --needed --noconfirm gum
 
+  choice_backup_hook=$(gum choose "Yes" "No" --header "Would you like to setup a pacman hook that creates a copy of the /boot directory?")
   choice_wm=$(cat window_managers.txt | gum choose --no-limit --header "Choose window managers you would like to install.")
   choice_nvidia=$(gum choose "Yes" "No" --header "Would you like to install Nvidia drivers?")
   choice_gaming_tools=$(gum choose "Yes" "No" --header "Would you like to install gaming tools?")
   choice_dotfiles=$(gum choose "Yes" "No" --header "Would you like to install Noir Dotfiles?")
   choice_wallpapers=$(gum choose "Yes" "No" --header "Would you like to install Noir Wallpapers?")
+}
+
+setup_backup_hook() {
+  case "$choice_backup_hook" in
+  Yes)
+    echo "→ Setting up pacman boot backup hook..."
+    echo "→ Configuring /boot backup when pacman transactions are made..."
+    sudo -i -u root /bin/bash <<EOF
+mkdir /etc/pacman.d/hooks
+echo "[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Path
+Target = usr/lib/modules/*/vmlinuz
+
+[Action]
+Depends = rsync
+Description = Backing up /boot...
+When = PostTransaction
+Exec = /usr/bin/rsync -a --delete /boot /.bootbackup" > /etc/pacman.d/hooks/50-bootbackup.hook
+EOF
+    ;;
+  No) echo "→ Skipping setup of pacman boot backup hook..." ;;
+  esac
 }
 
 install_window_managers() {
@@ -358,22 +384,7 @@ sudo chown -R $USER:$USER /opt/$USER
 set_variables
 
 # Boot backup hook
-echo "→ Configuring /boot backup when pacman transactions are made..."
-sudo -i -u root /bin/bash <<EOF
-mkdir /etc/pacman.d/hooks
-echo "[Trigger]
-Operation = Upgrade
-Operation = Install
-Operation = Remove
-Type = Path
-Target = usr/lib/modules/*/vmlinuz
-
-[Action]
-Depends = rsync
-Description = Backing up /boot...
-When = PostTransaction
-Exec = /usr/bin/rsync -a --delete /boot /.bootbackup" > /etc/pacman.d/hooks/50-bootbackup.hook
-EOF
+setup_backup_hook
 
 # Fix laptop lid acting like airplane mode key
 echo "→ Fixing laptop lid acting like airplane mode key..."
