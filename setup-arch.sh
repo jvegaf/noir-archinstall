@@ -174,6 +174,7 @@ packages_apps=(
   "calibre"
   "foliate"
   "okular"
+  "libreoffice-fresh"
   "discord"
   "filezilla"
   "filelight"
