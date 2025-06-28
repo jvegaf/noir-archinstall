@@ -111,7 +111,7 @@ packages_common_wayland=(
   "wlogout"
   "wl-clipboard"
   "copyq"
-  "wofi"
+  "rofi-wayland"
   "waybar"
   "mako"
   "swww"
@@ -225,8 +225,8 @@ set_variables() {
   sudo pacman -S --needed --noconfirm gum
 
   choice_backup_hook=$(gum choose "Yes" "No" --header "Would you like to setup a pacman hook that creates a copy of the /boot directory?")
-  choice_wm=$(cat window_managers.txt | gum choose --no-limit --header "Choose window managers you would like to install.")
   choice_nvidia=$(gum choose "Yes" "No" --header "Would you like to install Nvidia drivers?")
+  choice_wm=$(gum choose "hyprland" "niri" "awesome" "i3" --no-limit --header "Choose window managers you would like to install.")
   choice_gaming_tools=$(gum choose "Yes" "No" --header "Would you like to install gaming tools?")
   choice_dotfiles=$(gum choose "Yes" "No" --header "Would you like to install Noir Dotfiles?")
   choice_wallpapers=$(gum choose "Yes" "No" --header "Would you like to install Noir Wallpapers?")
