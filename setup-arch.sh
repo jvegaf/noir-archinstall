@@ -12,7 +12,6 @@ packages_common_utils=(
   "git"
   "git-lfs"
   "lazygit"
-  "intel-ucode"
   "pacman-contrib"
   "curl"
   "wget"
@@ -225,8 +224,9 @@ set_variables() {
   sudo pacman -S --needed --noconfirm gum
 
   choice_backup_hook=$(gum choose "Yes" "No" --header "Would you like to setup a pacman hook that creates a copy of the /boot directory?")
+  choice_microcode=$(gum choose "Intel" "AMD" "None" --header "Would you like to install processor microcode?")
   choice_nvidia=$(gum choose "Yes" "No" --header "Would you like to install Nvidia drivers?")
-  choice_wm=$(gum choose "hyprland" "niri" "awesome" "i3" --no-limit --header "Choose window managers you would like to install.")
+  choice_wm=$(gum choose "hyprland" "niri" "awesome" "i3" --no-limit --header "Choose window managers to be installed.")
   choice_gaming_tools=$(gum choose "Yes" "No" --header "Would you like to install gaming tools?")
   choice_dotfiles=$(gum choose "Yes" "No" --header "Would you like to install Noir Dotfiles?")
   choice_wallpapers=$(gum choose "Yes" "No" --header "Would you like to install Noir Wallpapers?")
@@ -261,10 +261,22 @@ install_window_managers() {
   IFS = ', '
   for choice in "${choice_wm[@]}"; do
     case "$choice" in
-    hyprland*) install_packages "${packages_hyprland[@]}" ;;
-    niri*) install_packages "${packages_niri[@]}" ;;
-    awesome*) install_packages "${packages_awesome[@]}" ;;
-    i3*) install_packages "${packages_i3[@]}" ;;
+    hyprland*)
+      install_packages "${packages_hyprland[@]}"
+      install_packages "${packages_common_wayland[@]}"
+      ;;
+    niri*)
+      install_packages "${packages_niri[@]}"
+      install_packages "${packages_common_wayland[@]}"
+      ;;
+    awesome*)
+      install_packages "${packages_awesome[@]}"
+      install_packages "${packages_common_x11[@]}"
+      ;;
+    i3*)
+      install_packages "${packages_i3[@]}"
+      install_packages "${packages_common_x11[@]}"
+      ;;
     esac
   done
 }
@@ -278,6 +290,20 @@ install_misc() {
 
   # Ollama
   curl -fsSL https://ollama.com/install.sh | sh
+}
+
+install_microcode() {
+  case "$choice_microcode" in
+  Intel)
+    echo "→ Installing Intel microcode..."
+    paru -S --needed --noconfirm intel-ucode
+    ;;
+  AMD)
+    echo "→ Installing AMD microcode..."
+    paru -S --needed --noconfirm amd-ucode
+    ;;
+  None) echo "→ Skipping installation of microcode..." ;;
+  esac
 }
 
 install_nvidia_drivers() {
@@ -423,10 +449,8 @@ echo "→ Updating the system..."
 paru -Syu --needed --noconfirm
 
 # Install required packages
-echo "→ Installing utilities, WMs and applications.."
+echo "→ Installing utility packages..."
 install_packages "${packages_common_utils[@]}"
-install_packages "${packages_common_x11[@]}"
-install_packages "${packages_common_wayland[@]}"
 
 # Install window managers
 install_window_managers
@@ -446,6 +470,9 @@ sudo chsh -s /usr/bin/zsh root
 
 # Install miscellaneous packages
 install_misc
+
+# Install processor microcode
+install_microcode
 
 # Setup Nvidia drivers
 install_nvidia_drivers
