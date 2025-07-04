@@ -182,21 +182,12 @@ packages_apps=(
 
 packages_fonts=(
   "maplemono-ttf"
-  "maplemono-nf-unhinted"
-  "maplemono-nf-cn-unhinted"
-  "gnu-free-fonts"
   "noto-fonts"
-  "ttf-bitstream-vera"
-  "ttf-croscore"
-  "ttf-dejavu"
-  "ttf-droid"
-  "ttf-ibm-plex"
-  "ttf-liberation"
-  "wqy-zenhei"
-  "ttf-mona-sans"
+  "noto-fonts-cjk"
+  "noto-fonts-emoji"
+  "noto-fonts-extra"
   "apple-fonts"
   "ttf-ms-fonts"
-  "nerd-fonts"
 )
 
 packages_gaming=(
