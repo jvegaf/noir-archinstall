@@ -166,6 +166,7 @@ packages_apps=(
   "thunar-vcs-plugin"
   "thunar-volman"
   "tumbler"
+  "dolphin"
   "yazi"
   "imagemagick"
   "qbittorrent"
