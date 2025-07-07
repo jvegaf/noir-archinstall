@@ -276,11 +276,11 @@ install_window_managers() {
 
 install_misc() {
   # RMPC Music player
-  cargo install --git https://github.com/mierak/rmpc --locked
+  cargo install -q --git https://github.com/mierak/rmpc --locked
   sudo ln -sf $(which rmpc) /bin/rmpc
 
   # Wallust color scheme generator
-  cargo install wallust
+  cargo install -q wallust
 
   # Ollama
   curl -fsSL https://ollama.com/install.sh | sh
