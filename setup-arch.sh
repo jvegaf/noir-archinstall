@@ -84,6 +84,9 @@ packages_common_utils=(
   "ncdu"
   "dkms"
   "archlinux-xdg-menu"
+  "qt5ct-kde"
+  "qt6ct-kde"
+  "matugen-bin"
 )
 
 packages_common_x11=(
@@ -179,6 +182,7 @@ packages_apps=(
   "filezilla"
   "filelight"
   "gnome-disk-utility"
+  "nomacs"
 )
 
 packages_fonts=(
@@ -480,7 +484,6 @@ install_gaming_tools
 # Setup mandatory mpd folders and files
 echo "→ Setting up MPD..."
 setup_mpd
-
 # Install flatpaks
 echo "→ Installing flatpaks..."
 sudo pacman -S --needed --noconfirm flatpak
