@@ -189,6 +189,7 @@ packages_fonts=(
   "noto-fonts-extra"
   "apple-fonts"
   "ttf-ms-fonts"
+  "otf-font-awesome"
 )
 
 packages_gaming=(
