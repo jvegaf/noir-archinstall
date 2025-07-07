@@ -432,11 +432,14 @@ sudo pacman -S --needed --noconfirm rustup
 rustup default stable
 
 # Install paru AUR Helper
-echo "→ Installing paru..."
-sudo pacman -S --needed --noconfirm base-devel
-git clone https://aur.archlinux.org/paru.git /tmp/paru
-cd /tmp/paru
-makepkg -si --needed --noconfirm
+check_paru="$(sudo pacman -Qs paru | grep "local" | grep "paru")"
+if [ -n "${check_paru}" ]; then
+  echo "→ Installing paru..."
+  sudo pacman -S --needed --noconfirm base-devel
+  git clone https://aur.archlinux.org/paru.git /tmp/paru
+  cd /tmp/paru
+  makepkg -si --needed --noconfirm
+fi
 
 # Do an initial update
 echo "→ Updating the system..."
