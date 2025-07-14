@@ -84,6 +84,7 @@ packages_common_utils=(
   "archlinux-xdg-menu"
   "qt5ct-kde"
   "qt6ct-kde"
+  "wallust"
   "matugen-bin"
   "adw-gtk-theme"
   "bibata-cursor-theme"
@@ -283,9 +284,6 @@ install_misc() {
   # RMPC Music player
   cargo install -q --git https://github.com/mierak/rmpc --locked
   sudo ln -sf $(which rmpc) /bin/rmpc
-
-  # Wallust color scheme generator
-  cargo install -q wallust
 
   # Ollama
   curl -fsSL https://ollama.com/install.sh | sh
