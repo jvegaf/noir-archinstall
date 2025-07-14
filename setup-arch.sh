@@ -58,8 +58,6 @@ packages_common_utils=(
   "bluez-utils"
   "blueman"
   "yt-dlp"
-  "catppuccin-cursors-macchiato"
-  "tela-circle-icon-theme-dracula"
   "ly"
   "ntfs-3g"
   "acpi"
@@ -87,6 +85,9 @@ packages_common_utils=(
   "qt5ct-kde"
   "qt6ct-kde"
   "matugen-bin"
+  "adw-gtk-theme"
+  "bibata-cursor-theme"
+  "tela-circle-icon-theme-dracula"
 )
 
 packages_common_x11=(
@@ -365,6 +366,7 @@ install_dotfiles() {
 
     bat cache --build
     sudo flatpak override --filesystem=xdg-data/themes
+    flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 
     return 0
     ;;
