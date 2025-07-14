@@ -158,8 +158,6 @@ packages_apps=(
   "vim"
   "nano"
   "vscodium-bin"
-  "vscodium-bin-features"
-  "vscodium-bin-marketplace"
   "mpd"
   "mpc"
   "mpv"
@@ -184,6 +182,8 @@ packages_apps=(
   "filelight"
   "gnome-disk-utility"
   "nomacs"
+  "obsidian"
+  "shortwave"
 )
 
 packages_fonts=(
@@ -338,8 +338,6 @@ setup_mpd() {
 
 install_flatpaks() {
   flatpak install flathub com.github.tchx84.Flatseal --assumeyes
-  flatpak install flathub de.haeckerfelix.Shortwave --assumeyes
-  flatpak install flathub md.obsidian.Obsidian --assumeyes
   flatpak install flathub com.github.vikdevelop.photopea_app --assumeyes
 }
 
