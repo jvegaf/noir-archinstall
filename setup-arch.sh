@@ -218,6 +218,7 @@ set_variables() {
   choice_microcode=$(gum choose "Intel" "AMD" "None" --header "Would you like to install processor microcode?")
   choice_nvidia=$(gum choose "Yes" "No" --header "Would you like to install Nvidia drivers?")
   choice_wm=$(gum choose "hyprland" "niri" "awesome" "i3" --no-limit --header "Choose window managers to be installed.")
+  choice_apps=$(gum choose "Yes" "No" --header "Would you like to install apps (browsers, file managers, terminal emulators, etc.)?")
   choice_gaming_tools=$(gum choose "Yes" "No" --header "Would you like to install gaming tools?")
   choice_dotfiles=$(gum choose "Yes" "No" --header "Would you like to install Noir Dotfiles?")
   choice_wallpapers=$(gum choose "Yes" "No" --header "Would you like to install Noir Wallpapers?")
@@ -302,6 +303,16 @@ install_nvidia_drivers() {
     install_packages "${packages_nvidia[@]}"
     ;;
   No) echo "→ Skipping installation of Nvidia drivers..." ;;
+  esac
+}
+
+install_apps() {
+  case "$choice_apps" in
+  Yes)
+    echo "→ Installing applications..."
+    install_packages "${packages_apps[@]}"
+    ;;
+  No) echo "→ Skipping installation of apps..." ;;
   esac
 }
 
@@ -446,11 +457,9 @@ install_packages "${packages_common_utils[@]}"
 # Install window managers
 install_window_managers
 
-# Install fonts, apps, and missing firmware
+# Install fonts and missing firmware
 echo "→ Installing fonts..."
 install_packages "${packages_fonts[@]}"
-echo "→ Installing applications..."
-install_packages "${packages_apps[@]}"
 echo "→ Installing potentially missing firmware..."
 install_packages "${packages_firmware[@]}"
 
@@ -467,6 +476,9 @@ install_microcode
 
 # Setup Nvidia drivers
 install_nvidia_drivers
+
+# Install apps
+install_apps
 
 # Install gaming tools
 install_gaming_tools
