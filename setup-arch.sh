@@ -368,6 +368,15 @@ install_dotfiles() {
     sudo flatpak override --filesystem=xdg-data/themes
     flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 
+    # Link user configs with root configs
+    sudo mkdir /root/.config
+    sudo ln -sf /home/$USER/.noir-dotfiles/.zshrc /root/.zshrc
+    sudo ln -s /home/$USER/.noir-dotfiles/.config/zsh /root/.config/zsh
+    sudo ln -sf /home/$USER/.noir-dotfiles/.config/starship.toml /root/.config/starship.toml
+    sudo ln -s /home/$USER/.noir-dotfiles/.config/nvim /root/.config/nvim
+    sudo mkdir -p /root/.cache/wal
+    sudo ln -s /home/$USER/.noir-dotfiles/.cache/wal/colors-wal.vim /root/.cache/wal/colors-wal.vim
+
     return 0
     ;;
   No)
@@ -402,7 +411,7 @@ while true; do
 done
 
 # Create user folders
-mkdir /home/$USER/{Code,Games,Media,Misc,Mounts,My}
+mkdir /home/$USER/{Code,Games,Media,Mounts,My}
 mkdir -p /home/$USER/.local/{bin,share/backgrounds,share/icons}
 sudo mkdir /opt/$USER
 sudo chown -R $USER:$USER /opt/$USER
