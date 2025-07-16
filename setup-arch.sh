@@ -159,6 +159,7 @@ packages_apps=(
   "vim"
   "nano"
   "vscodium-bin"
+  "vscodium-bin-marketplace"
   "mpd"
   "mpc"
   "mpv"
