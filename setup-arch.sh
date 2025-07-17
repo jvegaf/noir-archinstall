@@ -90,6 +90,7 @@ packages_common_utils=(
   "adw-gtk-theme"
   "bibata-cursor-theme"
   "tela-circle-icon-theme-dracula"
+  "eww-git"
 )
 
 packages_common_x11=(
@@ -345,10 +346,6 @@ install_flatpaks() {
   flatpak install flathub com.github.vikdevelop.photopea_app --assumeyes
 }
 
-install_ags() {
-  paru -S --needed --noconfirm libastal-io-git libastal-git aylurs-gtk-shell
-}
-
 install_dotfiles() {
   case "$choice_dotfiles" in
   Yes)
@@ -381,6 +378,7 @@ install_dotfiles() {
 
     # Setup pywalfox
     sudo pywalfox install
+
     return 0
     ;;
   No)
@@ -504,10 +502,6 @@ setup_mpd
 echo "→ Installing flatpaks..."
 sudo pacman -S --needed --noconfirm flatpak
 install_flatpaks
-
-# Install AGS (Astal widgets)
-echo "→ Installing AGS (Astal widgets)..."
-install_ags
 
 # Set right-click dragging to resize windows in GNOME
 echo "→ Setting right-click dragging to resize windows in GNOME..."
