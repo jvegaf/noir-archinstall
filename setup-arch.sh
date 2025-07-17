@@ -86,6 +86,7 @@ packages_common_utils=(
   "qt6ct-kde"
   "wallust"
   "matugen-bin"
+  "python-pywalfox"
   "adw-gtk-theme"
   "bibata-cursor-theme"
   "tela-circle-icon-theme-dracula"
@@ -378,6 +379,8 @@ install_dotfiles() {
     sudo mkdir -p /root/.cache/wal
     sudo ln -s /home/$USER/.noir-dotfiles/.cache/wal/colors-wal.vim /root/.cache/wal/colors-wal.vim
 
+    # Setup pywalfox
+    sudo pywalfox install
     return 0
     ;;
   No)
