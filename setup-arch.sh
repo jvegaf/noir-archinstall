@@ -178,6 +178,7 @@ packages_apps=(
   "nomacs"
   "obsidian"
   "shortwave"
+  "qalculate-gtk"
 )
 
 packages_fonts=(
