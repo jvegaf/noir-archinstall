@@ -181,6 +181,7 @@ packages_apps=(
   "obsidian"
   "shortwave"
   "qalculate-gtk"
+  "clock-rs-git"
 )
 
 packages_fonts=(
