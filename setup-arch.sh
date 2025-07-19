@@ -132,6 +132,7 @@ packages_hyprland=(
   "xdg-desktop-portal-hyprland"
   "hyprlock"
   "pyprland"
+  "hypridle"
   "uwsm"
 )
 
