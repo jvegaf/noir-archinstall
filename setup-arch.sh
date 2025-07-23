@@ -15,6 +15,7 @@ packages_common_utils=(
   "pacman-contrib"
   "curl"
   "wget"
+  "net-tools"
   "unzip"
   "rsync"
   "glibc"
@@ -82,8 +83,6 @@ packages_common_utils=(
   "ncdu"
   "dkms"
   "archlinux-xdg-menu"
-  "qt5ct-kde"
-  "qt6ct-kde"
   "wallust"
   "matugen-bin"
   "python-pywalfox"
@@ -91,6 +90,8 @@ packages_common_utils=(
   "bibata-cursor-theme"
   "tela-circle-icon-theme-dracula"
   "eww-git"
+  "qt5ct-kde"
+  "qt6ct-kde"
 )
 
 packages_common_x11=(
