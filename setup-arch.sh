@@ -181,6 +181,7 @@ packages_apps=(
   "gnome-disk-utility"
   "nomacs"
   "obsidian"
+  "rmpc"
   "shortwave"
   "qalculate-gtk"
   "clock-rs-git"
@@ -281,10 +282,6 @@ install_window_managers() {
 }
 
 install_misc() {
-  # RMPC Music player
-  cargo install -q --git https://github.com/mierak/rmpc --locked
-  sudo ln -sf $(which rmpc) /bin/rmpc
-
   # Ollama
   curl -fsSL https://ollama.com/install.sh | sh
 }
