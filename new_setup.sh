@@ -14,10 +14,10 @@ error_exit() {
 trap 'error_exit $LINENO "$BASH_COMMAND"' ERR
 
 # COMPROBAR QUE ES ARCH LINUX
-if ! grep -qi "arch" /etc/os-release; then
-  echo "Este script solo funciona en Arch Linux."
-  exit 1
-fi
+# if ! grep -qi "arch" /etc/os-release; then
+#   echo "Este script solo funciona en Arch Linux."
+#   exit 1
+# fi
 
 # COMPROBAR DEPENDENCIAS
 for dep in gum git curl; do
@@ -47,10 +47,213 @@ install_packages() {
 }
 
 # ARRAYS DE PAQUETES (revisar duplicados antes)
-packages_common_utils=(acpi adw-gtk-theme alsa-utils ...)
-packages_common_x11=(xorg xsel dex ...)
-packages_common_wayland=(qt5-wayland qt6-wayland ...)
-# ... resto de arrays ...
+packages_common_utils=(
+  "acpi"
+  "adw-gtk-theme"
+  "alsa-utils"
+  "archlinux-xdg-menu"
+  "ark"
+  "bat"
+  "bat-extras"
+  "bibata-cursor-theme"
+  "bind"
+  "blueman"
+  "bluez"
+  "bluez-utils"
+  "brightnessctl"
+  "btop"
+  "cava"
+  "cmake"
+  "cpio"
+  "curl"
+  "dkms"
+  "docker"
+  "docker-compose"
+  "downgrade"
+  "eww-git"
+  "eza"
+  "fastfetch"
+  "fzf"
+  "git"
+  "git-lfs"
+  "github-cli"
+  "glibc"
+  "gnome-keyring"
+  "go"
+  "gtk4"
+  "gvfs"
+  "gvfs-mtp"
+  "gvfs-smb"
+  "kitty"
+  "lazygit"
+  "less"
+  "lib32-pipewire"
+  "libva-nvidia-driver"
+  "lsd"
+  "luarocks"
+  "ly"
+  "man-db"
+  "man-pages"
+  "matugen-bin"
+  "meson"
+  "mise"
+  "mlocate"
+  "ncdu"
+  "net-tools"
+  "network-manager-applet"
+  "networkmanager-openvpn"
+  "ntfs-3g"
+  "nwg-look"
+  "pacman-contrib"
+  "pavucontrol"
+  "pipewire"
+  "pipewire-alsa"
+  "pipewire-audio"
+  "pipewire-pulse"
+  "pkgconf-pkg-config"
+  "pkgfile"
+  "playerctl"
+  "python-pywalfox"
+  "python-gobject"
+  "python-pip"
+  "python-pipx"
+  "python-pynvim"
+  "qt5ct-kde"
+  "qt6ct-kde"
+  "reflector"
+  "ripgrep"
+  "rsync"
+  "sad"
+  "sshfs"
+  "superfile"
+  "starship"
+  "stow"
+  "tealdeer"
+  "tela-circle-icon-theme-dracula"
+  "tmux"
+  "unarchiver"
+  "unzip"
+  "uv"
+  "wallust"
+  "wget"
+  "wireguard-tools"
+  "wireplumber"
+  "yt-dlp"
+  "zoxide"
+  "zsh"
+  "zstd"
+)
+
+packages_common_x11=(
+  "xorg"
+  "xsel"
+  "dex"
+  "xdotool"
+  "xclip"
+  "cliphist"
+  "xinput"
+  "rofi"
+  "polybar"
+  "dunst"
+  "feh"
+  "maim"
+  "picom"
+)
+
+packages_common_wayland=(
+  "qt5-wayland"
+  "qt6-wayland"
+  "egl-wayland"
+  "wlr-randr"
+  "wlogout"
+  "wl-clipboard"
+  "copyq"
+  "rofi-wayland"
+  "waybar"
+  "mako"
+  "swww"
+)
+
+packages_hyprland=(
+  "hyprland"
+  "hyprutils"
+  "hyprpicker"
+  "hyprpolkitagent"
+  "hyprshot"
+  "xdg-desktop-portal-hyprland"
+  "hyprlock"
+  "pyprland"
+  "hypridle"
+  "uwsm"
+)
+
+packages_niri=(
+  "niri"
+  "xwayland-satellite"
+  "xdg-desktop-portal-gnome"
+)
+
+packages_awesome=(
+  "awesome"
+  "lain"
+  "polkit-gnome"
+)
+
+packages_i3=(
+  "i3-wm"
+  "i3lock"
+  "autotiling"
+)
+
+packages_apps=(
+  "clock-rs-git"
+  "dolphin"
+  "filelight"
+  "firefox"
+  "foliate"
+  "ghostty"
+  "gnome-disk-utility"
+  "imagemagick"
+  "lazydocker"
+  "lazygit"
+  "mpc"
+  "mpd"
+  "mpv"
+  "nano"
+  "neovim"
+  "nomacs"
+  "okular"
+  "orca-slicer-unstable-bin"
+  "qalculate-gtk"
+  "qbittorrent"
+  "rmpc"
+  "shortwave"
+  "superfile"
+  "vim"
+  "vscodium-bin"
+  "vscodium-bin-marketplace"
+  "yazi"
+)
+
+packages_fonts=(
+  "maplemono-ttf"
+  "noto-fonts"
+  "noto-fonts-emoji"
+  "apple-fonts"
+  "ttf-ms-fonts"
+  "otf-font-awesome"
+)
+
+packages_firmware=(
+  "aic94xx-firmware"
+)
+
+packages_nvidia=(
+  "nvidia-dkms"
+  "lib32-nvidia-utils"
+  "nvidia-utils"
+  "nvidia-settings"
+)
 
 # OPCIONES INTERACTIVAS
 choice_backup_hook=$(gum choose "Yes" "No" --header "¿Configurar hook de backup de /boot?")
