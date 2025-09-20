@@ -37,6 +37,7 @@ packages_common_utils=(
   "fzf"
   "git"
   "git-lfs"
+  "github-cli"
   "glibc"
   "gnome-keyring"
   "go"
