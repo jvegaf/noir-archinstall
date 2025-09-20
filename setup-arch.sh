@@ -85,6 +85,7 @@ packages_common_utils=(
   "rsync"
   "sad"
   "sshfs"
+  "superfile"
   "starship"
   "stow"
   "tealdeer"
