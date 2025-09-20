@@ -2,96 +2,105 @@
 
 # Install required packages
 install_packages() {
-  paru -S --needed --noconfirm "$@"
+  paru -Syu --needed --noconfirm "$@"
   # for pkg; do
   #   paru -S --needed --noconfirm "${pkg}"
   # done
 }
 
 packages_common_utils=(
-  "git"
-  "git-lfs"
-  "lazygit"
-  "pacman-contrib"
-  "curl"
-  "wget"
-  "net-tools"
-  "unzip"
-  "rsync"
-  "glibc"
-  "cmake"
-  "meson"
-  "cpio"
-  "uv"
-  "go"
-  "luarocks"
-  "nodejs"
-  "npm"
-  "podman"
-  "pkgconf-pkg-config"
-  "stow"
-  "nwg-look"
-  "zsh"
-  "starship"
-  "fzf"
-  "zoxide"
-  "lsd"
+  "acpi"
+  "adw-gtk-theme"
+  "alsa-utils"
+  "archlinux-xdg-menu"
+  "ark"
   "bat"
   "bat-extras"
-  "cava"
-  "brightnessctl"
-  "playerctl"
-  "pavucontrol"
-  "alsa-utils"
-  "pipewire"
-  "lib32-pipewire"
-  "pipewire-pulse"
-  "pipewire-alsa"
-  "pipewire-audio"
-  "wireplumber"
-  "btop"
-  "network-manager-applet"
-  "python3-pip"
-  "python3-gobject"
-  "gtk4"
-  "fastfetch"
+  "bibata-cursor-theme"
+  "bind"
+  "blueman"
   "bluez"
   "bluez-utils"
-  "blueman"
-  "yt-dlp"
-  "ly"
-  "ntfs-3g"
-  "acpi"
-  "libva-nvidia-driver"
-  "zstd"
-  "mlocate"
-  "bind"
-  "man-db"
-  "man-pages"
-  "tealdeer"
-  "ark"
+  "brightnessctl"
+  "btop"
+  "cava"
+  "cmake"
+  "cpio"
+  "curl"
+  "dkms"
+  "docker"
+  "docker-compose"
   "downgrade"
-  "less"
-  "ripgrep"
-  "reflector"
-  "pkgfile"
-  "openvpn"
-  "networkmanager-openvpn"
+  "eww-git"
+  "eza"
+  "fastfetch"
+  "fzf"
+  "git"
+  "git-lfs"
+  "glibc"
+  "gnome-keyring"
+  "go"
+  "gtk4"
   "gvfs"
   "gvfs-mtp"
   "gvfs-smb"
-  "ncdu"
-  "dkms"
-  "archlinux-xdg-menu"
-  "wallust"
+  "kitty"
+  "lazygit"
+  "less"
+  "lib32-pipewire"
+  "libva-nvidia-driver"
+  "lsd"
+  "luarocks"
+  "ly"
+  "man-db"
+  "man-pages"
   "matugen-bin"
+  "meson"
+  "mise"
+  "mlocate"
+  "ncdu"
+  "net-tools"
+  "network-manager-applet"
+  "networkmanager-openvpn"
+  "ntfs-3g"
+  "nwg-look"
+  "pacman-contrib"
+  "pavucontrol"
+  "pipewire"
+  "pipewire-alsa"
+  "pipewire-audio"
+  "pipewire-pulse"
+  "pkgconf-pkg-config"
+  "pkgfile"
+  "playerctl"
   "python-pywalfox"
-  "adw-gtk-theme"
-  "bibata-cursor-theme"
-  "tela-circle-icon-theme-dracula"
-  "eww-git"
+  "python-gobject"
+  "python-pip"
+  "python-pipx"
+  "python-pynvim"
   "qt5ct-kde"
   "qt6ct-kde"
+  "reflector"
+  "ripgrep"
+  "rsync"
+  "sad"
+  "sshfs"
+  "starship"
+  "stow"
+  "tealdeer"
+  "tela-circle-icon-theme-dracula"
+  "tmux"
+  "unarchiver"
+  "unzip"
+  "uv"
+  "wallust"
+  "wget"
+  "wireguard-tools"
+  "wireplumber"
+  "yt-dlp"
+  "zoxide"
+  "zsh"
+  "zstd"
 )
 
 packages_common_x11=(
@@ -156,60 +165,46 @@ packages_i3=(
 )
 
 packages_apps=(
-  "ghostty"
-  "firefox"
-  "librewolf-bin"
-  "neovim"
-  "vim"
-  "nano"
-  "vscodium-bin"
-  "vscodium-bin-marketplace"
-  "mpd"
-  "mpc"
-  "mpv"
+  "clock-rs-git"
   "dolphin"
-  "yazi"
-  "imagemagick"
-  "qbittorrent"
-  "keepassxc"
-  "foliate"
-  "okular"
-  "libreoffice-fresh"
-  "discord"
-  "filezilla"
   "filelight"
+  "firefox"
+  "foliate"
+  "ghostty"
   "gnome-disk-utility"
+  "imagemagick"
+  "lazydocker"
+  "lazygit"
+  "mpc"
+  "mpd"
+  "mpv"
+  "nano"
+  "neovim"
   "nomacs"
-  "obsidian"
+  "okular"
+  "orca-slicer-unstable-bin"
+  "qalculate-gtk"
+  "qbittorrent"
   "rmpc"
   "shortwave"
-  "qalculate-gtk"
-  "clock-rs-git"
+  "superfile"
+  "vim"
+  "vscodium-bin"
+  "vscodium-bin-marketplace"
+  "yazi"
 )
 
 packages_fonts=(
   "maplemono-ttf"
   "noto-fonts"
-  "noto-fonts-cjk"
   "noto-fonts-emoji"
-  "noto-fonts-extra"
   "apple-fonts"
   "ttf-ms-fonts"
   "otf-font-awesome"
 )
 
-packages_gaming=(
-  "steam"
-  "lutris"
-  "umu-launcher"
-)
-
 packages_firmware=(
   "aic94xx-firmware"
-  "ast-firmware"
-  "linux-firmware-qlogic"
-  "wd719x-firmware"
-  "upd72020x-fw"
 )
 
 packages_nvidia=(
@@ -220,14 +215,13 @@ packages_nvidia=(
 )
 
 set_variables() {
-  sudo pacman -S --needed --noconfirm gum
+  sudo pacman -Syu --needed --noconfirm gum
 
   choice_backup_hook=$(gum choose "Yes" "No" --header "Would you like to setup a pacman hook that creates a copy of the /boot directory?")
   choice_microcode=$(gum choose "Intel" "AMD" "None" --header "Would you like to install processor microcode?")
   choice_nvidia=$(gum choose "Yes" "No" --header "Would you like to install Nvidia drivers?")
   choice_wm=$(gum choose "hyprland" "niri" "awesome" "i3" --no-limit --header "Choose window managers to be installed.")
   choice_apps=$(gum choose "Yes" "No" --header "Would you like to install apps (browsers, file managers, terminal emulators, etc.)?")
-  choice_gaming_tools=$(gum choose "Yes" "No" --header "Would you like to install gaming tools?")
   choice_dotfiles=$(gum choose "Yes" "No" --header "Would you like to install Noir Dotfiles?")
   choice_wallpapers=$(gum choose "Yes" "No" --header "Would you like to install Noir Wallpapers?")
 }
@@ -258,7 +252,7 @@ EOF
 }
 
 install_window_managers() {
-  IFS = ', '
+  IFS=', '
   for choice in "${choice_wm[@]}"; do
     case "$choice" in
     hyprland*)
@@ -290,11 +284,11 @@ install_microcode() {
   case "$choice_microcode" in
   Intel)
     echo "→ Installing Intel microcode..."
-    paru -S --needed --noconfirm intel-ucode
+    paru -Syu --needed --noconfirm intel-ucode
     ;;
   AMD)
     echo "→ Installing AMD microcode..."
-    paru -S --needed --noconfirm amd-ucode
+    paru -Syu --needed --noconfirm amd-ucode
     ;;
   None) echo "→ Skipping installation of microcode..." ;;
   esac
@@ -320,16 +314,6 @@ install_apps() {
   esac
 }
 
-install_gaming_tools() {
-  case "$choice_gaming_tools" in
-  Yes)
-    echo "→ Installing gaming tools..."
-    install_packages "${packages_gaming[@]}"
-    ;;
-  No) echo "→ Skipping installation of gaming tools..." ;;
-  esac
-}
-
 setup_mpd() {
   mkdir ~/.local/share/mpd
   touch ~/.local/share/mpd/database
@@ -341,11 +325,6 @@ setup_mpd() {
   mpc update
 }
 
-install_flatpaks() {
-  flatpak install flathub com.github.tchx84.Flatseal --assumeyes
-  flatpak install flathub com.github.vikdevelop.photopea_app --assumeyes
-}
-
 install_dotfiles() {
   case "$choice_dotfiles" in
   Yes)
@@ -354,27 +333,25 @@ install_dotfiles() {
     cd ~ || exit
     case "$choice_wallpapers" in
     Yes)
-      git clone --depth 1 --recurse-submodules https://github.com/somanoir/.noir-dotfiles.git
+      git clone --depth 1 --recurse-submodules https://github.com/jvegaf/.noir-dotfiles.git
       ;;
     No)
-      git clone --depth 1 https://github.com/somanoir/.noir-dotfiles.git
+      git clone --depth 1 https://github.com/jvegaf/.noir-dotfiles.git
       ;;
     esac
     cd .noir-dotfiles || exit
     stow .
 
     bat cache --build
-    sudo flatpak override --filesystem=xdg-data/themes
-    flatpak install org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 
     # Link user configs with root configs
     sudo mkdir /root/.config
-    sudo ln -sf /home/$USER/.noir-dotfiles/.zshrc /root/.zshrc
-    sudo ln -s /home/$USER/.noir-dotfiles/.config/zsh /root/.config/zsh
-    sudo ln -sf /home/$USER/.noir-dotfiles/.config/starship.toml /root/.config/starship.toml
-    sudo ln -s /home/$USER/.noir-dotfiles/.config/nvim /root/.config/nvim
+    sudo ln -sf /home/"$USER"/.noir-dotfiles/.zshrc /root/.zshrc
+    sudo ln -s /home/"$USER"/.noir-dotfiles/.config/zsh /root/.config/zsh
+    sudo ln -sf /home/"$USER"/.noir-dotfiles/.config/starship.toml /root/.config/starship.toml
+    sudo ln -s /home/"$USER"/.noir-dotfiles/.config/nvim /root/.config/nvim
     sudo mkdir -p /root/.cache/wal
-    sudo ln -s /home/$USER/.noir-dotfiles/.cache/wal/colors-wal.vim /root/.cache/wal/colors-wal.vim
+    sudo ln -s /home/"$USER"/.noir-dotfiles/.cache/wal/colors-wal.vim /root/.cache/wal/colors-wal.vim
 
     # Setup pywalfox
     sudo pywalfox install
@@ -413,10 +390,10 @@ while true; do
 done
 
 # Create user folders
-mkdir /home/$USER/{Code,Games,Media,Mounts,My}
-mkdir -p /home/$USER/.local/{bin,share/backgrounds,share/icons}
-sudo mkdir /opt/$USER
-sudo chown -R $USER:$USER /opt/$USER
+mkdir /home/"$USER"/Code
+mkdir -p /home/"$USER"/.local/{bin,share/backgrounds,share/icons}
+sudo mkdir /opt/"$USER"
+sudo chown -R "$USER":"$USER" /opt/"$USER"
 
 # Set global variables
 set_variables
@@ -441,7 +418,7 @@ zram-size = min(ram, 8192)" >/etc/systemd/zram-generator.conf
 
 # Pacman eye-candy features
 echo "→ Enabling colours and parallel downloads for pacman..."
-sudo sed -Ei 's/^#(Color)$/\1/;s/^#(ParallelDownloads).*/\1 = 10/' /etc/pacman.conf
+sudo sed -Ei 's/^#(Color)$/\1/;s/^#(ParallelDownloads).*/\1 = 20/' /etc/pacman.conf
 
 # Setup rust
 echo "→ Installing Rust..."
@@ -454,7 +431,7 @@ if [ -n "${check_paru}" ]; then
   echo "→ Installing paru..."
   sudo pacman -S --needed --noconfirm base-devel
   git clone https://aur.archlinux.org/paru.git /tmp/paru
-  cd /tmp/paru
+  cd /tmp/paru || exit
   makepkg -si --needed --noconfirm
 fi
 
@@ -477,7 +454,7 @@ install_packages "${packages_firmware[@]}"
 
 # Switch user and root shell to Zsh
 echo "→ Switching user and root shell to Zsh..."
-sudo chsh -s /usr/bin/zsh $USER
+sudo chsh -s /usr/bin/zsh "$USER"
 sudo chsh -s /usr/bin/zsh root
 
 # Install miscellaneous packages
@@ -492,16 +469,10 @@ install_nvidia_drivers
 # Install apps
 install_apps
 
-# Install gaming tools
-install_gaming_tools
 
 # Setup mandatory mpd folders and files
 echo "→ Setting up MPD..."
 setup_mpd
-# Install flatpaks
-echo "→ Installing flatpaks..."
-sudo pacman -S --needed --noconfirm flatpak
-install_flatpaks
 
 # Set right-click dragging to resize windows in GNOME
 echo "→ Setting right-click dragging to resize windows in GNOME..."
@@ -515,7 +486,10 @@ tldr --update
 echo "→ Enabling systemctl services..."
 systemctl --user enable pipewire
 sudo systemctl enable bluetooth
-sudo systemctl enable podman
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+sudo groupadd dialout
+sudo usermod -aG dialout $USER
 sudo systemctl enable ollama
 
 # Install Noir Dotfiles
