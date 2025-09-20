@@ -423,17 +423,17 @@ sudo sed -Ei 's/^#(Color)$/\1/;s/^#(ParallelDownloads).*/\1 = 20/' /etc/pacman.c
 
 # Setup rust
 echo "→ Installing Rust..."
-sudo pacman -S --needed --noconfirm rustup
+sudo pacman -Syu --needed --noconfirm rustup
 rustup default stable
+cargo install grip-grab
 
 # Install paru AUR Helper
-check_paru="$(sudo pacman -Qs paru | grep "local" | grep "paru")"
-if [ -n "${check_paru}" ]; then
-  echo "→ Installing paru..."
-  sudo pacman -S --needed --noconfirm base-devel
-  git clone https://aur.archlinux.org/paru.git /tmp/paru
-  cd /tmp/paru || exit
-  makepkg -si --needed --noconfirm
+if ! sudo pacman -Qs paru &> /dev/null; then
+    echo "→ Installing paru..."
+    sudo pacman -Syu --needed --noconfirm base-devel
+    git clone https://aur.archlinux.org/paru.git /tmp/paru
+    cd /tmp/paru || exit
+    makepkg -si --needed --noconfirm
 fi
 
 # Do an initial update
