@@ -21,14 +21,14 @@ trap 'error_exit $LINENO "$BASH_COMMAND"' ERR
 
 # COMPROBAR DEPENDENCIAS
 for dep in gum git curl; do
-  if ! command -v "$dep" &> /dev/null; then
+  if ! command -v "$dep" &>/dev/null; then
     echo "Instalando dependencia: $dep"
     sudo pacman -Syu --needed --noconfirm "$dep"
   fi
 done
 
 # INSTALAR PARU SI NO EXISTE
-if ! command -v paru &> /dev/null; then
+if ! command -v paru &>/dev/null; then
   echo "Instalando paru (AUR Helper)..."
   sudo pacman -Syu --needed --noconfirm base-devel
   git clone https://aur.archlinux.org/paru.git "$TMP_PARU"
@@ -268,7 +268,7 @@ choice_wallpapers=$(gum choose "Yes" "No" --header "¿Instalar Noir Wallpapers?"
 setup_backup_hook() {
   if [[ "$choice_backup_hook" == "Yes" ]]; then
     sudo mkdir -p /etc/pacman.d/hooks
-    sudo tee /etc/pacman.d/hooks/50-bootbackup.hook > /dev/null <<EOF
+    sudo tee /etc/pacman.d/hooks/50-bootbackup.hook >/dev/null <<EOF
 [Trigger]
 Operation = Upgrade
 Operation = Install
@@ -287,10 +287,10 @@ EOF
 install_window_managers() {
   for choice in "${choice_wm[@]}"; do
     case "$choice" in
-      hyprland) install_packages "${packages_hyprland[@]}" "${packages_common_wayland[@]}" ;;
-      niri) install_packages "${packages_niri[@]}" "${packages_common_wayland[@]}" ;;
-      awesome) install_packages "${packages_awesome[@]}" "${packages_common_x11[@]}" ;;
-      i3) install_packages "${packages_i3[@]}" "${packages_common_x11[@]}" ;;
+    hyprland) install_packages "${packages_hyprland[@]}" "${packages_common_wayland[@]}" ;;
+    niri) install_packages "${packages_niri[@]}" "${packages_common_wayland[@]}" ;;
+    awesome) install_packages "${packages_awesome[@]}" "${packages_common_x11[@]}" ;;
+    i3) install_packages "${packages_i3[@]}" "${packages_common_x11[@]}" ;;
     esac
   done
 }
@@ -301,8 +301,8 @@ install_misc() {
 
 install_microcode() {
   case "$choice_microcode" in
-    Intel) install_packages intel-ucode ;;
-    AMD) install_packages amd-ucode ;;
+  Intel) install_packages intel-ucode ;;
+  AMD) install_packages amd-ucode ;;
   esac
 }
 
@@ -323,7 +323,9 @@ install_dotfiles() {
     git clone --depth 1 https://github.com/jvegaf/.noir-dotfiles.git
   fi
   cd .noir-dotfiles
-  stow .
+  stow . --adopt
+  ln -s ./gitconfig ~/.gitconfig
+  sudo cp 50-udisks.rules /etc/polkit-1/rules.d/
 }
 
 # CREAR CARPETAS DE USUARIO
