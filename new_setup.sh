@@ -42,7 +42,7 @@ fi
 install_packages() {
   local pkgs=("$@")
   for pkg in "${pkgs[@]}"; do
-    paru -Syu --needed --noconfirm "$pkg" || echo "Error instalando $pkg, continuando..."
+    paru -S --needed --noconfirm "$pkg" || echo "Error instalando $pkg, continuando..."
   done
 }
 
@@ -261,6 +261,7 @@ choice_microcode=$(gum choose "Intel" "AMD" "None" --header "¿Instalar microcod
 choice_nvidia=$(gum choose "Yes" "No" --header "¿Instalar drivers Nvidia?")
 choice_wm=$(gum choose "hyprland" "niri" "awesome" "i3" --no-limit --header "Elige window managers a instalar.")
 choice_apps=$(gum choose "Yes" "No" --header "¿Instalar aplicaciones?")
+choice_misc=$(gum choose "Yes" "No" --header "¿Instalar Ollama?")
 choice_dotfiles=$(gum choose "Yes" "No" --header "¿Instalar Noir Dotfiles?")
 choice_wallpapers=$(gum choose "Yes" "No" --header "¿Instalar Noir Wallpapers?")
 
@@ -296,7 +297,9 @@ install_window_managers() {
 }
 
 install_misc() {
-  curl -fsSL https://ollama.com/install.sh | sh
+  if [[ "$choice_misc" == "Yes" ]]; then
+    curl -fsSL https://ollama.com/install.sh | sh
+  fi
 }
 
 install_microcode() {
